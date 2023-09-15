@@ -1,0 +1,38 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status</title>
+    <link rel="stylesheet" href="./test.css">
+</head>
+<body>
+    <div class="container" style="text-align:center;">
+        <h1>Order Status</h1>
+        <h4 style="text-align:-10;">Order Details:</h4>
+        <h5>AWB:<%=AWBNum%></h5>
+        <% if(order == 1) { %>
+        <h5>OrderId:<%=OrderId%></h5>
+        <% } %>
+        <br>
+        <br>
+        <br>
+        <% if(order == 0) { %>
+            <img src=<%= milestones[0].img %> width = "20%" alt= <%= milestones[0].label %>>
+            <h2 ><%= milestones[0].label %></h2>
+            <br>
+            <% } %>
+            <% if(order == 1) { %>
+        <% milestones.forEach((milestone, index) => { %>
+            <div class="milestone" >
+                <i class="fas fa-check-circle"></i>
+                <img src=<%= milestone.img %> width = "40" alt="Order Processed">
+                <h5 ><%= milestone.label %></h5>
+                <br>
+            </div>
+        <% }); %>
+        <% } %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status</title>
+    <link rel="stylesheet" href="./test.css">
+</head>
+<body>
+    <div class="container" style="text-align:center;">
+        <h1>Order Details</h1>
+        <% if(order == 0) { %>
+            <img src="https://icons.veryicon.com/png/o/miscellaneous/template-3/no-order.png"  width = "20%" alt= "No Orders found">
+            <h2>No order found</h2>
+            <br>
+            <% } %>
+            <% if(order == 1) { %> 
+            <div class="milestone" >
+                <table border="1" style="margin-left:auto; margin-right:auto;">
+                    <tbody>
+                        <tr>
+                            <td>AWB number</td>
+                            <td>Order Id</td>
+                            <td>Customer name</td>
+                            <td>Customer contact</td>
+                            <td>Payment</td>
+                            <td>Delivered Date</td>
+                            <td>Status</td>
+                        </tr>
+        
+        <% milestones.forEach((milestone, index) => { %>
+                        <tr>
+                            <% if(!milestone.AWBnumber) { %>
+                            <td>Not assign</td>
+                            <% } %>
+                            <% if(milestone.AWBnumber){ %>
+                                <td><%= milestone.AWBnumber %></td>
+                                <% } %>
+                            <td><%= milestone.OrderId %></td>
+                            <td><%= milestone.CustomerName %></td>
+                            <td><%= milestone.CustomerContact %></td>
+                            <td><%= milestone.Payment %></td>
+                            <% if(!milestone.DeliveredDate) { %>
+                                <td>Not assign</td>
+                                <% } %>
+                                <% if(milestone.DeliveredDate){ %>
+                                    <td><%= milestone.DeliveredDate %></td>
+                                    <% } %>
+                            <td><%= milestone.Status %></td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+                <br>
+            </div>
+            <% } %>
+    </div>
+</body>
+</html>
