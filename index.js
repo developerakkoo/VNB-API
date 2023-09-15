@@ -23,9 +23,11 @@ app.use(function (req, res, next) {
 
 app.use(shipmentRoute);
 
-app.get('/',(req,res)=>{
-    res.send('hello')
-})
+app.all("*", (req, res, next) => {
+    res.status(404).json({
+        message:"Page not found"
+    });
+});
 
 
 mongoose
