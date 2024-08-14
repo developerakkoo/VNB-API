@@ -1,18 +1,24 @@
 const route = require('express').Router();
 const auth = require('../middleware/auth');
 const {
+    courierServiceAbility,
     createShipment,
     getAllShipments,
     getShipmentsById,
     trackOrderPage,
     trackOrder,
     getAllOrderPage
-} = require('../controller/shipment.controller')
-const admin = require('../controller/admin.controller')
+} = require('../controller/shipment.controller');
+
+const admin = require('../controller/admin.controller');
 
 route.post('/admin/signup',admin.postSignup);
 
 route.post('/admin/login',admin.postLogin);
+
+route.post('/create/user',admin.postUserData);
+
+route.post('/courierServiceAbility',auth.authenticateReq,courierServiceAbility);
 
 route.post('/create/shipment',auth.authenticateReq,createShipment);
 

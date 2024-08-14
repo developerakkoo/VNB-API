@@ -32,7 +32,7 @@ try {
         "breadth": req.body.breadth,
         "height": req.body.height,
         "weight": req.body.weight,
-        "pickup_location": "HomeNew",
+        "pickup_location": "primary",
         "vendor_details": {
         "email": "abcdd@abcdd.com",
         "phone": 9879879879,
@@ -43,7 +43,7 @@ try {
         "state": "new delhi",
         "country": "india",
         "pin_code": "110077",
-        "pickup_location": "HomeNew"
+        "pickup_location": "primary"
         }
     });
     
@@ -237,4 +237,27 @@ exports.getAllOrderPage = async (req,res)=>{
 }
 
 
+exports.courierServiceAbility = async(req,res) => {
+    try {
+        const {pin_code} = req.query
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `https://apiv2.shiprocket.in/v1/external/courier/serviceability/?pickup_postcode=411001&delivery_postcode=${pin_code}&weight=2&cod=1`,
+            headers: { 
+                'Authorization': `Bearer ${req.token}`
+            }
+        };
+            axios.request(config)
+            .then((response) => {
+            // console.log(JSON.stringify(response.data));
+            res.status(200).json({message:`Successfully`,statusCode:200,data:response.data});
+            })
+            .catch((error) => {
+                res.status(200).json({message:`Item not deliverable to this location`,statusCode:200});
+            });
+    } catch (error) {
+        res.status(500).json({message:error.message,status:'ERROR',statusCode:500});
+    }
+}
 
